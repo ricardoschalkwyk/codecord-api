@@ -1,0 +1,12 @@
+{
+  "name": "codecord-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:ricardoschalkwyk/codecord-api.git",
+  "author": "Ricardo Schalkwyk <schalkwykr24@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
