@@ -2,8 +2,13 @@
   "name": "codecord-api",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "start": "node --es-module-specifier-resolution=node ./src/index",
+    "dev": "nodemon --es-module-specifier-resolution=node ./src/index"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
