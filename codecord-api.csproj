@@ -9,8 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MailChimp.NET" Version="1.1.92" />
+    <PackageReference Include="MailChimp.Net.V3" Version="5.5.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="System.Net.Http.Json" Version="8.0.0" />
   </ItemGroup>
 
 </Project>
