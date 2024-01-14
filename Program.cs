@@ -1,3 +1,5 @@
+using System.Data;
+using codecord_api;
 using codecord_api.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +15,10 @@ builder.Services.AddHttpClient("EmailApiClient", (c) => {
 });
 
 builder.Services.AddControllers();
+builder.Services.AddScoped<IUsersRepository, UsersRepository>();
+builder.Services.AddScoped<IUsersService, UsersService>();
+// Add mapper
+// builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DataContext>(options =>

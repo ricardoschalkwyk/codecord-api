@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using codecord_api.Models;
 
 namespace codecord_api.Data
 {

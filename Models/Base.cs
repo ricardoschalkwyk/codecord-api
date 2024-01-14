@@ -1,11 +1,10 @@
-﻿
-namespace codecord_api
+﻿namespace codecord_api
 {
   public abstract class Base
   {
-    public int Id {get;}
-    public DateTime CreatedAt;
-    public DateTime UpdatedAt;
-    public bool IsDeleted;
+    public int Id { get; }
+    public DateTime CreatedAt { get; set;}
+    public DateTime UpdatedAt { get; set;}
+    public bool IsDeleted { get; set; }
   }
 }
