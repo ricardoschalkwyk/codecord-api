@@ -2,7 +2,7 @@
 
 namespace codecord_api;
 
-public class UsersService
+public class UsersService : IUsersService
 {
   private readonly IUsersRepository _usersRepository;
 
@@ -16,7 +16,8 @@ public class UsersService
     return users;
   }
 
-  public User GetUser(int userId) {
+  public User GetUser(int? userId) {
+
     var user = _usersRepository.GetUser(userId);
 
     return user;

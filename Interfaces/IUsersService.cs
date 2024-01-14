@@ -2,5 +2,5 @@
 public interface IUsersService
 {
   ICollection<User> GetUsers();
-  User GetUser(int userId);
+  User GetUser(int? userId);
 }

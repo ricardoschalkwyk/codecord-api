@@ -16,7 +16,7 @@ namespace codecord_api
       return _context.User.OrderBy(u => u.Id).ToList();
     }
 
-    public User GetUser(int userId)
+    public User GetUser(int? userId)
     {
       return _context.User.First(u => u.Id == userId);
     }

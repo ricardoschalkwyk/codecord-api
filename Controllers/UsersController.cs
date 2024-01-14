@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ServiceStack.Text;
 
 namespace codecord_api
 {
@@ -24,8 +25,13 @@ namespace codecord_api
     }
 
     [HttpGet("{userId}")]
-    public IActionResult FindOne(int userId)
+    public IActionResult FindOne(int? userId)
     {
+      if (!userId.HasValue)
+      {
+        return BadRequest();
+      }
+
       var user = _usersService.GetUser(userId);
 
       return Ok(user);
