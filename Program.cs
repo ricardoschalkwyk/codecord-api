@@ -6,11 +6,10 @@ builder.Services.AddHttpClient("TaskApiClient", (c) => {
 });
 
 builder.Services.AddHttpClient("EmailApiClient", (c) => {
-    c.BaseAddress = new Uri("https://mandrillapp.com/api/1.0");
+    c.BaseAddress = new Uri("https://mandrillapp.com/api/1.0/");
 });
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
