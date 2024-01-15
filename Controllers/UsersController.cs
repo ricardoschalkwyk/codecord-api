@@ -36,5 +36,24 @@ namespace codecord_api
 
       return Ok(user);
     }
+
+    [HttpPost()]
+    public async Task<ActionResult<User>> AddUser([FromBody] User user)
+    {
+      try
+      {
+        if (user == null)
+          return BadRequest();
+
+        var addedUser = await _usersService.AddUser(user);
+
+        return Ok(addedUser);
+      }
+      catch (Exception)
+      {
+        return StatusCode(StatusCodes.Status500InternalServerError,
+        "Error Creating new user record");
+      }
+    }
   }
 }

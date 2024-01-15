@@ -6,20 +6,29 @@ public class UsersService : IUsersService
 {
   private readonly IUsersRepository _usersRepository;
 
-  public UsersService(IUsersRepository usersRepository) {
+  public UsersService(IUsersRepository usersRepository)
+  {
     this._usersRepository = usersRepository;
   }
 
-  public ICollection<User> GetUsers() {
+  public ICollection<User> GetUsers()
+  {
     var users = _usersRepository.GetUsers();
 
     return users;
   }
 
-  public User GetUser(int? userId) {
+  public User GetUser(int? userId)
+  {
 
     var user = _usersRepository.GetUser(userId);
 
     return user;
+  }
+  public Task<User> AddUser(User user)
+  {
+    var newUser = _usersRepository.AddUser(user);
+
+    return newUser;
   }
 }
