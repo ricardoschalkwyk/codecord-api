@@ -18,17 +18,45 @@ public class UsersService : IUsersService
     return users;
   }
 
-  public User GetUser(int? userId)
+  public User? GetUser(int? userId)
   {
 
     var user = _usersRepository.GetUser(userId);
 
     return user;
   }
-  public Task<User> AddUser(User user)
+  public Task<User>? AddUser(User user)
   {
     var newUser = _usersRepository.AddUser(user);
 
     return newUser;
+  }
+
+  public Task<User>? UpdateUser(int? userId, User user)
+  {
+    var findUser = _usersRepository.GetUser(userId);
+
+    if (findUser == null)
+    {
+      return default;
+    }
+
+    var updatedUser = _usersRepository.UpdateUser(userId, user);
+
+    return updatedUser;
+  }
+
+  public Task<User>? DeleteUser(int? userId)
+  {
+    var findUser = _usersRepository.GetUser(userId);
+
+    if (findUser == null)
+    {
+      return default;
+    }
+
+    var user = _usersRepository.DeleteUser(userId);
+
+    return user;
   }
 }

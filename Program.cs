@@ -1,4 +1,3 @@
-using System.Data;
 using codecord_api;
 using codecord_api.Data;
 using Microsoft.EntityFrameworkCore;
@@ -6,11 +5,13 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddHttpClient("TaskApiClient", (c) => {
+builder.Services.AddHttpClient("TaskApiClient", (c) =>
+{
     c.BaseAddress = new Uri("https://jsonplaceholder.typicode.com");
 });
 
-builder.Services.AddHttpClient("EmailApiClient", (c) => {
+builder.Services.AddHttpClient("EmailApiClient", (c) =>
+{
     c.BaseAddress = new Uri("https://mandrillapp.com/api/1.0/");
 });
 
@@ -27,6 +28,8 @@ builder.Services.AddDbContext<DataContext>(options =>
 });
 
 var app = builder.Build();
+
+app.UseCors(builder => builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader());
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
