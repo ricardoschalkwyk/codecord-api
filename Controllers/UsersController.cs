@@ -1,8 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Any;
-using ServiceStack.Text;
+
 
 namespace codecord_api
 {
@@ -28,13 +26,8 @@ namespace codecord_api
     }
 
     [HttpGet("{userId}")]
-    public IActionResult FindOne(int? userId)
+    public IActionResult FindOne([FromRoute] int userId)
     {
-      if (!userId.HasValue)
-      {
-        return BadRequest();
-      }
-
       var user = _usersService.GetUser(userId);
 
       return Ok(user);
@@ -48,7 +41,7 @@ namespace codecord_api
         if (user == null)
           return BadRequest();
 
-
+        user.Name = Faker.Name.FullName();
         user.CreatedAt = DateTime.UtcNow;
         user.UpdatedAt = DateTime.UtcNow;
 
@@ -67,16 +60,18 @@ namespace codecord_api
     }
 
     [HttpPut("{userId}")]
-    public async Task<ActionResult<User>> UpdateUser(int? userId, [FromBody] User user)
+    public async Task<ActionResult<User>> UpdateUser([FromRoute] int userId, [FromBody] User user)
     {
       try
       {
-        if (!userId.HasValue)
+        var findUser = _usersService.GetUser(userId);
+
+        if (findUser == null)
         {
-          return BadRequest();
+          return NotFound();
         }
 
-        var userToUpdate = await _usersService.UpdateUser(userId, user);
+        var userToUpdate = await _usersService.UpdateUser(findUser, user);
 
         if (userToUpdate == null)
         {
@@ -93,21 +88,23 @@ namespace codecord_api
     }
 
     [HttpDelete("{userId}")]
-    public async Task<ActionResult<User>> DeleteUser(int? userId)
+    public async Task<ActionResult<User>> DeleteUser([FromRoute] int userId)
     {
-      if (!userId.HasValue)
-      {
-        return BadRequest();
-      }
-
-      var user = await _usersService.DeleteUser(userId);
+      var user = _usersService.GetUser(userId);
 
       if (user == null)
       {
+        return NotFound();
+      }
+
+      var deletedUser = await _usersService.DeleteUser(user);
+
+      if (deletedUser == null)
+      {
         return BadRequest();
       }
 
-      return Ok(user);
+      return Ok(deletedUser);
     }
 
   }

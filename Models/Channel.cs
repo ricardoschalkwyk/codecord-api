@@ -1,10 +1,14 @@
 ﻿namespace codecord_api
 {
-  public class Channel
+  public class Channel : Base
   {
-    public int ChannelId { get; set; }
-    public string? TextChatChannel {get; set;}
-    public string? VoiceChatChannel {get; set;}
-    public bool IsPrivate;
+    public bool IsPrivate { get; set; }
+    public string? Topic { get; set; }
+    public bool IsVoice { get; set; }
+    public string Name { get; set; } = "";
+    public bool IsText { get; set; }
+
+    public int? CategoryId { get; set; }
+    public Category? Category { get; set; }
   }
 }

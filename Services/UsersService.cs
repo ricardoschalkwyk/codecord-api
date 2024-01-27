@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace codecord_api;
+﻿namespace codecord_api;
 
 public class UsersService : IUsersService
 {
@@ -18,45 +16,31 @@ public class UsersService : IUsersService
     return users;
   }
 
-  public User? GetUser(int? userId)
+  public User? GetUser(int userId)
   {
-
-    var user = _usersRepository.GetUser(userId);
-
-    return user;
+    return _usersRepository.GetUser(userId);
   }
-  public Task<User>? AddUser(User user)
+  public Task<User?> AddUser(User user)
   {
     var newUser = _usersRepository.AddUser(user);
 
     return newUser;
   }
 
-  public Task<User>? UpdateUser(int? userId, User user)
+  public Task<User?> UpdateUser(User user, User newUser)
   {
-    var findUser = _usersRepository.GetUser(userId);
-
-    if (findUser == null)
-    {
-      return default;
-    }
-
-    var updatedUser = _usersRepository.UpdateUser(userId, user);
-
-    return updatedUser;
+    return _usersRepository.UpdateUser(user, newUser);
   }
 
-  public Task<User>? DeleteUser(int? userId)
+  public Task<User?> DeleteUser(User user)
   {
-    var findUser = _usersRepository.GetUser(userId);
+    // var findUser = _usersRepository.GetUser(userId);
 
-    if (findUser == null)
-    {
-      return default;
-    }
+    // if (findUser == null)
+    // {
+    //   return default;
+    // }
 
-    var user = _usersRepository.DeleteUser(userId);
-
-    return user;
+    return _usersRepository.DeleteUser(user);
   }
 }

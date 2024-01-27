@@ -18,15 +18,13 @@ namespace codecord_api
     }
 
     // Get 1 user
-    public User? GetUser(int? userId)
+    public User? GetUser(int userId)
     {
-      var user = _context.User.FirstOrDefault(u => u.Id == userId);
-
-      return user;
+      return _context.User.FirstOrDefault(u => u.Id == userId);
     }
 
     // Create 1 user
-    public async Task<User>? AddUser(User user)
+    public async Task<User?> AddUser(User user)
     {
       var result = await _context.User.AddAsync(user);
 
@@ -35,36 +33,27 @@ namespace codecord_api
       return result.Entity;
     }
 
-    public async Task<User>? UpdateUser(int? userId, User user)
+    public async Task<User?> UpdateUser(User user, User newUser)
     {
-      var result = GetUser(userId);
-
-      if (result == null)
-      {
-        return default;
-      }
-
-      result.PhoneNumber = user.PhoneNumber;
-      result.DisplayName = user.DisplayName;
-      result.UpdatedAt = DateTime.UtcNow;
-      result.UserName = user.UserName;
-      result.Email = user.Email;
-      result.Name = user.Name;
+      user.PhoneNumber = newUser.PhoneNumber;
+      user.DisplayName = newUser.DisplayName;
+      user.UpdatedAt = DateTime.UtcNow;
+      user.UserName = newUser.UserName;
+      user.Email = newUser.Email;
+      user.Name = newUser.Name;
 
       await _context.SaveChangesAsync();
 
-      return result;
+      return user;
     }
 
-    public async Task<User>? DeleteUser(int? userId)
+    public async Task<User?> DeleteUser(User user)
     {
-      var result = GetUser(userId);
-
-      result.IsDeleted = true;
+      user.IsDeleted = true;
 
       await _context.SaveChangesAsync();
 
-      return result;
+      return user;
     }
   }
 }
