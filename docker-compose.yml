@@ -9,4 +9,4 @@ services:
       SA_PASSWORD: "YourStrongPassword123"
       ACCEPT_EULA: "Y"
     volumes:
-      - ./data:/var/opt/mssql/data
+      - ./temp:/var/opt/mssql/data

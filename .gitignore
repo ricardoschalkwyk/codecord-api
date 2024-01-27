@@ -396,6 +396,9 @@ FodyWeavers.xsd
 *.msm
 *.msp
 
+# Temp Database Folder
+temp
+
 # JetBrains Rider
 *.sln.iml
 
