@@ -27,6 +27,19 @@ namespace codecord_api
 
       dataContext.User.AddRange(users);
       dataContext.SaveChanges();
+
+      // *************************************************
+
+      var serverFaker = new Faker<Server>()
+      .RuleFor(u => u.Name, f => f.Name.FirstName())
+      .RuleFor(u => u.CreatedAt, f => DateTime.UtcNow)
+      .RuleFor(u => u.UpdatedAt, f => DateTime.UtcNow);
+
+
+      var servers = serverFaker.UseSeed(1024).Generate(50);
+
+      dataContext.Server.AddRange(servers);
+      dataContext.SaveChanges();
     }
   }
 }

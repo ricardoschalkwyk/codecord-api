@@ -20,6 +20,7 @@ public class UsersService : IUsersService
   {
     return _usersRepository.GetUser(userId);
   }
+
   public Task<User?> AddUser(User user)
   {
     var newUser = _usersRepository.AddUser(user);
@@ -34,13 +35,6 @@ public class UsersService : IUsersService
 
   public Task<User?> DeleteUser(User user)
   {
-    // var findUser = _usersRepository.GetUser(userId);
-
-    // if (findUser == null)
-    // {
-    //   return default;
-    // }
-
     return _usersRepository.DeleteUser(user);
   }
 }
