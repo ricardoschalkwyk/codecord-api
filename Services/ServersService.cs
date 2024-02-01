@@ -28,6 +28,10 @@ public class ServersService : IServersService
     return newServer;
   }
 
+  public Task<Server?> JoinServer(Server server, int userId)
+  {
+    return _serversRepository.JoinServer(server, userId);
+  }
   public Task<Server?> UpdateServer(Server server, Server newServer)
   {
     return _serversRepository.UpdateServer(server, newServer);

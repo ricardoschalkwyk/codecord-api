@@ -1,4 +1,5 @@
 ﻿using codecord_api.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace codecord_api
 {
@@ -20,7 +21,7 @@ namespace codecord_api
     // Get 1 user
     public User? GetUser(int userId)
     {
-      return _context.User.FirstOrDefault(u => u.Id == userId);
+      return _context.User.Include(u => u.Server).FirstOrDefault(u => u.Id == userId);
     }
 
     // Create 1 user

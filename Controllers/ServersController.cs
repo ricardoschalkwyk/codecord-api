@@ -55,6 +55,34 @@ namespace codecord_api
       }
     }
 
+    [HttpPut("join/{serverId}/{userId}")]
+    public async Task<ActionResult<Server>> JoinServer([FromRoute] int serverId, [FromRoute] int userId)
+    {
+      try
+      {
+        var findServer = _serversService.GetServer(serverId);
+
+        if (findServer == null)
+        {
+          return NotFound("Can't find server");
+        }
+
+        var addUserToServer = await _serversService.JoinServer(findServer, userId);
+
+        if (addUserToServer == null)
+        {
+          return BadRequest();
+        }
+
+        return Ok(addUserToServer);
+      }
+      catch (Exception)
+      {
+        return StatusCode(StatusCodes.Status500InternalServerError,
+        "Error Creating new user record");
+      }
+    }
+
     [HttpPut("{serverId}")]
     public async Task<ActionResult<Server>> UpdateServer([FromRoute] int serverId, [FromBody] Server server)
     {

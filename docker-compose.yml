@@ -3,6 +3,7 @@ services:
   sql-server-db:
     container_name: codecord-api
     image: mcr.microsoft.com/mssql/server:2019-latest
+    restart: always
     ports:
       - "1433:1433"
     environment:

@@ -1,4 +1,5 @@
 ﻿using codecord_api.Data;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace codecord_api
 {
@@ -31,6 +32,20 @@ namespace codecord_api
       await _context.SaveChangesAsync();
 
       return result.Entity;
+    }
+
+    // Join a server based on the user thats logged in
+    public async Task<Server?> JoinServer(Server server, int userId)
+    {
+      var user = _context.User.FirstOrDefault(u => u.Id == userId);
+
+      var serverCheck = _context.User.FirstOrDefault(s => s.Id == server.Id);
+
+      server.Users.Add(user);
+
+      await _context.SaveChangesAsync();
+
+      return server;
     }
 
     public async Task<Server?> UpdateServer(Server server, Server newServer)
